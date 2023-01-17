@@ -3,9 +3,9 @@
 .sign__container {
   @include wh(300px, auto);
   @include flex();
+  @include center-window($top: calc(50% - 60px));
   flex-direction: column;
   gap: 10px;
-  @include center-window($top: calc(50% - 60px));
   padding: 20px;
   background-size: 120px 70px;
   box-shadow: $modalWindowShadow;
