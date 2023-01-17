@@ -1,0 +1,46 @@
+@import "../../styles/default.scss";
+
+.sign__container {
+  @include wh(300px, auto);
+  @include flex();
+  flex-direction: column;
+  gap: 10px;
+  @include center-window($top: calc(50% - 60px));
+  padding: 20px;
+  background-size: 120px 70px;
+  box-shadow: $modalWindowShadow;
+  border-radius: $modalWindowBorderRad;
+  -webkit-border-radius: $modalWindowBorderRad;
+  -moz-border-radius: $modalWindowBorderRad;
+  -ms-border-radius: $modalWindowBorderRad;
+  -o-border-radius: $modalWindowBorderRad;
+}
+
+.sign__redirect {
+  @include flex();
+  margin-top: 20px;
+  gap: 10px;
+
+    .sign__link {
+      text-decoration: none;
+      font-size: large;
+    }
+
+    .sign__link:hover {
+      color: #ff00008d;
+    }
+}
+
+
+
+.sign__btn-link {
+  text-decoration: none;
+
+    .sign__btn {
+      @include btn();
+    }
+
+    .sign__btn:hover {
+      @include btn-hover();
+    }
+}
