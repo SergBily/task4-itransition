@@ -1,9 +1,10 @@
 import NotFound from './NotFoundPage/NotFound';
-import Main from './MainPage/Main';
 import Auth from './AuthPage/Auth';
 import Management from './ManagementPage/Management';
 import Registration from './RegistrationPage/Registration';
+import Home from './HomePage/Home';
+import Layout from './LayoutPage/Layout';
 
 export {
-  NotFound, Main, Auth, Management, Registration,
+  NotFound, Auth, Management, Registration, Home, Layout,
 };

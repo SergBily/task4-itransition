@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './NotFound.scss';
 
 const NotFound: React.FC = (): JSX.Element => (
-  <>
+  <div className="container">
     <svg width="380px" height="500px" viewBox="0 0 837 1045" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
       <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <path d="M353,9 L626.664028,170 L626.664028,487 L353,642 L79.3359724,487 L79.3359724,170 L353,9 Z" id="Polygon-1" stroke="#007FB2" strokeWidth="6" />
@@ -22,7 +22,7 @@ const NotFound: React.FC = (): JSX.Element => (
         </div>
       </div>
     </div>
-  </>
+  </div>
 );
 
 export default NotFound;

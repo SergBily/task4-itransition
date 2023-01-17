@@ -1,0 +1,29 @@
+@import '../../styles/default.scss';
+
+.header__wrapper {
+  @include wh(100%, 60px);
+  background-color: $btnBackColorHover;
+  padding: 0 15px;
+}
+
+.header__container {
+  @include wh(inherit, 60px);
+  @include flex($justify-content: space-between);
+}
+
+.header__nav {
+  @include wh(450px, 60px);
+  @include flex($justify-content: space-between);
+}
+
+.header__link {
+  text-decoration: none;
+
+    .header__btn {
+      @include btn();
+    }
+
+    .header__btn:hover {
+      @include btn-hover();
+    }
+}

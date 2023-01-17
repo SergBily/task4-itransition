@@ -1,24 +1,35 @@
-body {
-  background-color: #2F3242;
-}
-svg {
-  position: absolute;
+@import "../../styles/default.scss";
+
+.container {
+  @include wh(100%, 100%);
+  position: relative;
   top: 50%;
   left: 50%;
-  margin-top: -250px;
-  margin-left: -400px;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  @include flex($justify-content: center);
+  gap: 15%;
+  background-color: #2e32421d;
+}
+
+svg {
+  position: relative;
+  top: -7%;
 }
 .message-box {
   height: 200px;
-  width: 380px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: 50px;
-  color: #FFF;
+  width: 280px;
+  color: $btnBackColor;
   font-family: Roboto;
   font-weight: 300;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
 .message-box h1 {
   font-size: 60px;
@@ -29,20 +40,18 @@ svg {
   margin-top: 40px;
 }
 .buttons-con .action-link-wrap a {
-  background: #68c950;
+  @include btn($font-size: 14px);
+  // background: #68c950;
   padding: 8px 25px;
   border-radius: 4px;
-  color: #FFF;
   font-weight: bold;
-  font-size: 14px;
   transition: all 0.3s linear;
   cursor: pointer;
   text-decoration: none;
   margin-right: 10px
 }
 .buttons-con .action-link-wrap a:hover {
-  background: #5A5C6C;
-  color: #fff;
+  @include btn-hover();
 }
 
 #Polygon-1 , #Polygon-2 , #Polygon-3 , #Polygon-4 , #Polygon-4, #Polygon-5 {
