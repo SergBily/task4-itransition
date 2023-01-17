@@ -1,0 +1,6 @@
+@import "../../styles/default.scss";
+
+.wrapper {
+  @include wh(100%, 100%);
+  position: relative;
+}
