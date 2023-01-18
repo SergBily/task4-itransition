@@ -1,62 +1,120 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Registration.scss';
 import {
-  IconButton, InputLabel, InputAdornment, FormControl, Input, Button,
+  Button, Container, Grid, Paper, TextField, InputAdornment, IconButton,
 } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import handlerPreventDefault from '../../libs/handlers';
+
+interface RegistrationFields {
+  name: string,
+  email: string,
+  password: string,
+  showPassword: boolean
+}
 
 const Registration: React.FC = (): JSX.Element => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [values, setValues] = useState<RegistrationFields>({
+    name: '',
+    email: '',
+    password: '',
+    showPassword: false,
+  });
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
   };
+
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setValues({ ...values, [event.target.id]: event.target.value });
+  };
+
   return (
-    <div className="sign__container">
-      <h2 className="title">UserManagement</h2>
-      <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-        <InputLabel htmlFor="standard-adornment-password">Name</InputLabel>
-        <Input
-          id="standard-adornment-password"
-        />
-      </FormControl>
-      <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-        <InputLabel htmlFor="standard-adornment-password">Email</InputLabel>
-        <Input
-          id="standard-adornment-password"
-        />
-      </FormControl>
-      <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-        <Input
-          id="standard-adornment-password"
-          type={showPassword ? 'text' : 'password'}
-          endAdornment={(
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-            )}
-        />
-      </FormControl>
-      <Link to="auth" className="sign__btn-link">
-        <Button variant="contained" size="medium" className="sign__btn">
-          Sign up
-        </Button>
-      </Link>
-      <div className="sign__redirect">
-        <p>Already have an account?</p>
-        <Link to="/auth" className="sign__link">Sign in</Link>
-      </div>
+    <div>
+      <form onSubmit={handlerPreventDefault} className="sign__form">
+        <Container maxWidth="xs" className="sign__container">
+          <Grid
+            container
+            spacing={2}
+            direction="column"
+            justifyContent="center"
+            className="sign__container-grid"
+          >
+            <h2 className="title">UserManagement</h2>
+            <Paper elevation={2} sx={{ padding: 1 }} style={{ maxWidth: '100%' }}>
+              <Grid container spacing={3} direction="column">
+                <Grid item>
+                  <TextField
+                    id="name"
+                    type="text"
+                    fullWidth
+                    label="Name"
+                    placeholder="Enter your name"
+                    variant="outlined"
+                    value={values.name}
+                    onChange={changeHandler}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    id="email"
+                    type="email"
+                    fullWidth
+                    label="Email"
+                    placeholder="enter your email"
+                    variant="outlined"
+                    value={values.email}
+                    onChange={changeHandler}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    id="password"
+                    type={values.showPassword ? 'text' : 'password'}
+                    fullWidth
+                    label="Password"
+                    placeholder="enter your password"
+                    variant="outlined"
+                    value={values.password}
+                    onChange={changeHandler}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handlerPreventDefault}
+                            edge="end"
+                          >
+                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+                <Grid item>
+                  <Link to="/auth" className="sign__btn-link">
+                    <Button type="submit" fullWidth variant="contained" className="sign__btn">
+                      Sign up
+                    </Button>
+                  </Link>
+                </Grid>
+              </Grid>
+            </Paper>
+            <div className="sign__redirect">
+              <p>Already have an account?</p>
+              <Link to="/auth" className="sign__link">Sign in</Link>
+            </div>
+          </Grid>
+        </Container>
+      </form>
+      <ToastContainer />
     </div>
   );
 };

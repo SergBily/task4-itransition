@@ -1,12 +1,19 @@
 @import "../../styles/default.scss";
 
 .sign__container {
-  @include wh(300px, auto);
-  @include flex();
   @include center-window($top: calc(50% - 60px));
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
+  
+}
+
+.sign__form{
+  width: 400px;
+  @include wh(100%, auto);
+}
+
+.sign__container-grid {
+  width: 400px;
+  padding: 10px;
+  row-gap: 10px;
   background-size: 120px 70px;
   box-shadow: $modalWindowShadow;
   border-radius: $modalWindowBorderRad;
