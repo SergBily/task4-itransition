@@ -38,16 +38,10 @@
     }
 }
 
+.sign__btn {
+  @include btn();
+}
 
-
-.sign__btn-link {
-  text-decoration: none;
-
-    .sign__btn {
-      @include btn();
-    }
-
-    .sign__btn:hover {
-      @include btn-hover();
-    }
+.sign__btn:hover {
+  @include btn-hover();
 }

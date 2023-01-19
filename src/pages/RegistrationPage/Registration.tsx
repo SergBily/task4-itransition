@@ -7,36 +7,33 @@ import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import handlerPreventDefault from '../../libs/handlers';
-
-interface RegistrationFields {
-  name: string,
-  email: string,
-  password: string,
-  showPassword: boolean
-}
+import RegistLoginFields from '../../models';
+import useNewUser from '../../hooks/api';
 
 const Registration: React.FC = (): JSX.Element => {
-  const [values, setValues] = useState<RegistrationFields>({
+  const [visibilityPass, setvisibilityPass] = useState<boolean>(false);
+  const [values, setValues] = useState<RegistLoginFields>({
     name: '',
     email: '',
     password: '',
-    showPassword: false,
   });
 
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setvisibilityPass((visibility) => !visibility);
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValues({ ...values, [event.target.id]: event.target.value });
   };
 
+  const hendleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    useNewUser(values);
+  };
+
   return (
     <div>
-      <form onSubmit={handlerPreventDefault} className="sign__form">
+      <form onSubmit={hendleOnSubmit} className="sign__form">
         <Container maxWidth="xs" className="sign__container">
           <Grid
             container
@@ -75,7 +72,7 @@ const Registration: React.FC = (): JSX.Element => {
                 <Grid item>
                   <TextField
                     id="password"
-                    type={values.showPassword ? 'text' : 'password'}
+                    type={visibilityPass ? 'text' : 'password'}
                     fullWidth
                     label="Password"
                     placeholder="enter your password"
@@ -91,7 +88,7 @@ const Registration: React.FC = (): JSX.Element => {
                             onMouseDown={handlerPreventDefault}
                             edge="end"
                           >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                            {visibilityPass ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
                       ),
@@ -99,11 +96,9 @@ const Registration: React.FC = (): JSX.Element => {
                   />
                 </Grid>
                 <Grid item>
-                  <Link to="/auth" className="sign__btn-link">
-                    <Button type="submit" fullWidth variant="contained" className="sign__btn">
-                      Sign up
-                    </Button>
-                  </Link>
+                  <Button type="submit" fullWidth variant="contained" className="sign__btn">
+                    Sign up
+                  </Button>
                 </Grid>
               </Grid>
             </Paper>

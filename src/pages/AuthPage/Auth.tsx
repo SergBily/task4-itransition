@@ -7,25 +7,17 @@ import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import handlerPreventDefault from '../../libs/handlers';
-
-interface LoginFields {
-  name: string,
-  password: string,
-  showPassword: boolean
-}
+import RegistLoginFields from '../../models';
 
 const Auth: React.FC = (): JSX.Element => {
-  const [values, setValues] = useState<LoginFields>({
+  const [visibilityPass, setvisibilityPass] = useState<boolean>(false);
+  const [values, setValues] = useState<Omit<RegistLoginFields, 'email'>>({
     name: '',
     password: '',
-    showPassword: false,
   });
 
   const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+    setvisibilityPass((visibility) => !visibility);
   };
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -61,7 +53,7 @@ const Auth: React.FC = (): JSX.Element => {
                 <Grid item>
                   <TextField
                     id="password"
-                    type={values.showPassword ? 'text' : 'password'}
+                    type={visibilityPass ? 'text' : 'password'}
                     fullWidth
                     label="Password"
                     placeholder="enter your password"
@@ -77,7 +69,7 @@ const Auth: React.FC = (): JSX.Element => {
                             onMouseDown={handlerPreventDefault}
                             edge="end"
                           >
-                            {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                            {visibilityPass ? <VisibilityOff /> : <Visibility />}
                           </IconButton>
                         </InputAdornment>
                       ),
