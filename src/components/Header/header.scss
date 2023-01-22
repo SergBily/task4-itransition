@@ -6,6 +6,10 @@
   padding: 0 15px;
 }
 
+.header__title {
+  color: $title;
+}
+
 .header__container {
   @include wh(inherit, 60px);
   @include flex($justify-content: space-between);
@@ -16,14 +20,16 @@
   @include flex($justify-content: space-between);
 }
 
+.header__btn {
+  @include btn();
+  background-color: #574b75 !important;
+}
+
+.header__btn:hover {
+  @include btn-hover();
+  background-color: #574b754d !important;
+}
+
 .header__link {
   text-decoration: none;
-
-    .header__btn {
-      @include btn();
-    }
-
-    .header__btn:hover {
-      @include btn-hover();
-    }
 }
