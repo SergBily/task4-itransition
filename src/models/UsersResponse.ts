@@ -8,7 +8,8 @@ export default interface UserResponse {
   registrationDate: string,
   status: string,
   lastLoginDate: string,
-  __v: number
+  __v: number,
+  access: string
 }
 
 export interface Data {
@@ -18,4 +19,5 @@ export interface Data {
   id: string;
   lastLoginDate: string;
   status: string;
+  access: string;
 }

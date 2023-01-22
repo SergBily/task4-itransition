@@ -1,6 +1,6 @@
 type BlockParam = {
   summuaryId: string[],
-  access: boolean
+  access: string
 };
 
 export default BlockParam;

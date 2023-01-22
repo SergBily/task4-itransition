@@ -1,9 +1,9 @@
-import NotFound from './NotFoundPage/NotFound';
-import Auth from './AuthPage/Auth';
-import Management from './ManagementPage/Management';
-import RegistrationFields from './RegistrationPage/Registration';
-import Home from './HomePage/Home';
-import Layout from './LayoutPage/Layout';
+import NotFound from './notFoundPage/NotFound';
+import Auth from './authPage/Auth';
+import Management from './managementPage/Management';
+import RegistrationFields from './registrationPage/Registration';
+import Home from './homePage/Home';
+import Layout from './layoutPage/Layout';
 
 export {
   NotFound, Auth, Management, RegistrationFields as Registration, Home, Layout,

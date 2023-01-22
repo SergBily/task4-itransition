@@ -1,3 +1,3 @@
-const URL_SERVER = 'http://localhost:4000';
+const SERVER_URL = 'https://task4-itransition.herokuapp.com/';
 
-export default URL_SERVER;
+export default SERVER_URL;

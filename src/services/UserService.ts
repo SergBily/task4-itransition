@@ -10,10 +10,10 @@ export default class UserService {
     const a: any = [];
     data.forEach((d) => {
       const {
-        _id: id, name, email, registrationDate, lastLoginDate, status,
+        _id: id, name, email, registrationDate, lastLoginDate, status, access,
       } = d;
       a.push({
-        id, name, email, registrationDate, lastLoginDate, status,
+        id, name, email, registrationDate, lastLoginDate, status, access,
       });
     });
     return a as Data[];
