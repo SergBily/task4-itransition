@@ -1,22 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Registration.scss';
 import {
   Button, Container, Grid, Paper, TextField, InputAdornment, IconButton,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useSelector, useDispatch } from 'react-redux';
 import handlerPreventDefault from '../../libs/handlers';
-import RegistLoginFields from '../../models';
-import useNewUser from '../../hooks/api';
+import RegistrationUser from '../../models/RegistrationUser';
+import { registration, reset } from '../../redux/features/authSlice';
+import Spinner from '../../components/spiner/Spinner';
+import { AppDispatch, RootState } from '../../redux/Store';
+import { getAllUsers } from '../../redux/features/managementSlice';
+import toastPostionBottom from '../../libs/toat-position';
 
 const Registration: React.FC = (): JSX.Element => {
   const [visibilityPass, setvisibilityPass] = useState<boolean>(false);
-  const [values, setValues] = useState<RegistLoginFields>({
+
+  const [values, setValues] = useState<RegistrationUser>({
     name: '',
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const {
+    user, isLoading, isError, isSuccess, message,
+  } = useSelector(
+    (state: RootState) => state.auth,
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess) {
+      dispatch(getAllUsers());
+      toast.success('You are registered', toastPostionBottom);
+      navigate('/management');
+    }
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const handleClickShowPassword = () => {
     setvisibilityPass((visibility) => !visibility);
@@ -28,11 +56,15 @@ const Registration: React.FC = (): JSX.Element => {
 
   const hendleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    useNewUser(values);
+    dispatch(registration(values));
   };
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
-    <div>
+    <section>
       <form onSubmit={hendleOnSubmit} className="sign__form">
         <Container maxWidth="xs" className="sign__container">
           <Grid
@@ -109,8 +141,7 @@ const Registration: React.FC = (): JSX.Element => {
           </Grid>
         </Container>
       </form>
-      <ToastContainer />
-    </div>
+    </section>
   );
 };
 

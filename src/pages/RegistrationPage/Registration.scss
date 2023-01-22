@@ -40,8 +40,10 @@
 
 .sign__btn {
   @include btn();
+  background-color: #574b75 !important;
 }
 
 .sign__btn:hover {
   @include btn-hover();
+  background-color: #574b754d !important;
 }
